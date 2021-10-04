@@ -1,5 +1,7 @@
 package basePack_01_10_Test;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.Package;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,11 +19,11 @@ public class XcelReader {
     XSSFRow row;
     XSSFCell cell; //column
 
-   public XcelReader(String filePath) throws IOException {
-       this.file = new File(filePath);
-       this.fis = new FileInputStream(file);
-       this.wb = new XSSFWorkbook(fis);
-   }
+    public XcelReader(String filePath) throws IOException, InvalidFormatException {
+        this.file = new File(filePath);
+        this.fis = new FileInputStream(file);
+        this.wb = new XSSFWorkbook(Package.open(fis));
+    }
 
     public String getStringData(String sheetName, int rowNumber, int cellNumber) {
         this.sheet = wb.getSheet(sheetName);

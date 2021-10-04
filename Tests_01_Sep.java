@@ -1,38 +1,35 @@
-package testPack_01_10_Test;
+package basePack_01_10_Test;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-//import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import basePack_01_10_Test.BaseTest_01_Sep;
 //import pagesPack_01_10_Test.StoreLogInPage;
 
 public class Tests_01_Sep extends BaseTest_01_Sep {
 
-	@BeforeMethod
-	public void pageSetUp() {
-		driver.manage().window().maximize();
-		driver.navigate().to(homeUrl);
-	}
-	
+    @BeforeMethod
+    public void pageSetUp() {
+        driver.manage().window().maximize();
+        driver.navigate().to(homeUrl);
+    }
 
-	@Test (priority = 10)
-	public void successfulLogIn() throws InterruptedException {
-		WebElement logInButton = storeLogInPage.getLogInButton();
-		String username = xcelReader.getStringData("Sheet1", 1, 1);
-		String password = xcelReader.getStringData("Sheet1", 1, 2);
-		storeLogInPage.getLogInButton().click();
-		Thread.sleep(500);
-		storeLogInPage.insertUsername(username);
-		storeLogInPage.insertPassword(password);
-		Thread.sleep(500);
-		storeLogInPage.getSubmitLogInButton();
-		
-		Assert.assertTrue(storeLogInPage.getLogOutButton().isDisplayed());
-	}
+
+    @Test(priority = 10)
+    public void successfulLogIn() throws InterruptedException {
+        WebElement logInButton = storeLogInPage.getLogInButton(); // GDE KORISTIS LOGINBUTTON?
+        String username = xcelReader.getStringData("Sheet1", 1, 1);
+        String password = xcelReader.getStringData("Sheet1", 1, 2);
+        storeLogInPage.getLogInButton().click();
+        Thread.sleep(500);
+
+        storeLogInPage.insertUsername(username);
+        storeLogInPage.insertPassword(password);
+        Thread.sleep(500);
+        storeLogInPage.getSubmitLogInButton();
+
+        Assert.assertTrue(storeLogInPage.getLogOutButton().isDisplayed());
+    }
 	
 /*	@Test (priority = 20)
 	public void incorrectUsername() {
